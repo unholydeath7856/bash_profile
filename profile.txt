@@ -1,0 +1,70 @@
+createApp() {
+        cd ~/github/
+        if [ $2 == "php" ]; then
+                mkdir $1
+                cd $1
+                touch index.php
+                mkdir Assets/
+                mkdir Assets/Scripts Assets/Styles Assets/Images
+                mkdir Assets/Scripts/JS/ Assets/Scripts/PHP/ Assets/Styles/CSS Assets/Styles/Sass/
+                cp ~/github/Hydrogen-io/Assets/Scripts/JS/jquery.js ~/github/$1/Assets/Scripts/JS/jquery.js
+                touch Assets/Styles/CSS/main.css Assets/Styles/Sass/main.scss
+                mkdir Assets/Styles/Sass/1-tools/ Assets/Styles/Sass/2-sections/ Assets/Styles/Sass/3-modules/
+        fi
+
+        if [ $2 == "game" ]; then
+                mkdir $1
+                cd $1
+                touch index.html
+                mkdir Assets/
+                mkdir Assets/Scripts Assets/Styles Assets/Images
+                mkdir Assets/Scripts/JS/ Assets/Styles/CSS Assets/Styles/Sass/
+                cp ~/templates/game.js ~/github/$1/Assets/Scripts/JS/game.js
+                touch Assets/Styles/CSS/main.css Assets/Styles/Sass/main.scss
+                mkdir Assets/Styles/Sass/1-tools/ Assets/Styles/Sass/2-sections/  Assets/Styles/Sass/3-modules/
+        fi
+}
+
+selectApp() {
+        cd ~/github/$1/
+}
+
+syncApp() {
+        cd /
+        rsync -av Users/EvanCoulson/github/$1/* Applications/XAMPP/htdocs/$1/
+        selectApp $1
+}
+
+#!/usr/bin/env bash
+
+# Path to the bash it configuration
+
+export BASH_IT="/Users/EvanCoulson/.bash_it"
+
+# Lock and Load a custom theme file
+# location /.bash_it/themes/
+export BASH_IT_THEME='Zork'
+
+# Your place for hosting Git repos. I use this for private repos.
+export GIT_HOSTING='git@git.domain.com'
+
+# Don't check mail when opening terminal.
+unset MAILCHECK
+
+# Change this to your console based IRC client of choice.
+export IRC_CLIENT='irssi'
+
+# Set this to the command you use for todo.txt-cli
+export TODO="t"
+
+# Set this to false to turn off version control status checking within the prompt for all themes
+export SCM_CHECK=true
+
+# Set vcprompt executable path for scm advance info in prompt (demula theme)
+# https://github.com/xvzf/vcprompt
+#export VCPROMPT_EXECUTABLE=~/.vcprompt/bin/vcprompt
+
+# Load Bash It
+source $BASH_IT/bash_it.sh
+
+
